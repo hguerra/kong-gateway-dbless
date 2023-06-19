@@ -28,6 +28,17 @@ services:
         config:
           allow_paths:
             - /incidents.schema.json
+      - name: key-auth
+        enabled: true
+        config:
+          key_names:
+            - auth_token
+      - name: acl
+        enabled: true
+        config:
+          hide_groups_header: true
+          allow:
+            - mock
 
   - name: mock-service
     protocol: http
@@ -72,7 +83,10 @@ services:
         enabled: true
         config:
           minute: 5
-          policy: local
+          policy: redis
+          redis_host: redis
+          redis_port: 6379
+          redis_database: 0
 
 plugins:
   - name: correlation-id
@@ -142,8 +156,16 @@ consumers:
   - username: mock-user
     custom_id: ab4bf4a1-a8bd-4bec-a999-75b1eb281743
 
+  - username: mock-apikey
+    keyauth_credentials:
+      - key: abc
+
 jwt_secrets:
   - consumer: mock-user
     algorithm: HS256
     key: a36c3049b36249a3c9f8891cb127243c
     secret: e71829c351aa4242c2719cbfbe671c09
+
+acls:
+  - consumer: mock-apikey
+    group: mock

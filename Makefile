@@ -29,6 +29,9 @@ restart: config
 	docker compose restart kong
 	docker logs -f kong
 
+test_unauthorized_health:
+	curl -i -X GET http://localhost:8080/gateway/health/incidents.schema.json
+
 test_health:
 	curl -i -X GET http://localhost:8080/gateway/health/incidents.schema.json?auth_token=abc
 
