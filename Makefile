@@ -19,7 +19,7 @@ build: clean config build_docker
 
 up: config
 	docker compose up -d
-	docker logs -f kong
+	docker compose logs -f kong
 
 down: clean
 	docker compose down
@@ -27,16 +27,16 @@ down: clean
 
 restart: config
 	docker compose restart kong
-	docker logs -f kong
+	docker compose logs -f kong
 
 test_unauthorized_health:
-	curl -i -X GET http://localhost:8080/gateway/health/incidents.schema.json
+	curl -i -X GET http://localhost:8080/gateway/health/status
 
 test_health:
-	curl -i -X GET http://localhost:8080/gateway/health/incidents.schema.json?auth_token=abc
+	curl -i -X GET http://localhost:8080/gateway/health/status?auth_token=xyz
 
 test_gzip:
-	curl --compressed -i -X GET http://localhost:8080/gateway/health/incidents.schema.json?auth_token=abc -H 'Accept-Encoding: gzip'
+	curl --compressed -i -X GET http://localhost:8080/gateway/health/status?auth_token=xyz -H 'Accept-Encoding: gzip'
 
 test_path_not_allowed:
 	curl -i -X GET http://localhost:8080/gateway/health/mypath?auth_token=abc

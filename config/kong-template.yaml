@@ -4,7 +4,7 @@ _transform: true
 upstreams:
   - name: health-upstream
     targets:
-      - target: 'status.cloud.google.com:443'
+      - target: localhost:8001
         weight: 100
 
   - name: mock-upstream
@@ -14,7 +14,7 @@ upstreams:
 
 services:
   - name: health-service
-    protocol: https
+    protocol: http
     host: health-upstream
     port: 443
     routes:
@@ -27,7 +27,7 @@ services:
         enabled: true
         config:
           allow_paths:
-            - /incidents.schema.json
+            - /status
       - name: key-auth
         enabled: true
         config:
@@ -38,7 +38,7 @@ services:
         config:
           hide_groups_header: true
           allow:
-            - mock
+            - gcp
 
   - name: mock-service
     protocol: http
@@ -156,9 +156,9 @@ consumers:
   - username: mock-user
     custom_id: ab4bf4a1-a8bd-4bec-a999-75b1eb281743
 
-  - username: mock-apikey
+  - username: gcp-apikey
     keyauth_credentials:
-      - key: abc
+      - key: xyz
 
 jwt_secrets:
   - consumer: mock-user
@@ -167,5 +167,5 @@ jwt_secrets:
     secret: e71829c351aa4242c2719cbfbe671c09
 
 acls:
-  - consumer: mock-apikey
-    group: mock
+  - consumer: gcp-apikey
+    group: gcp

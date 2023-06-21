@@ -19,16 +19,17 @@ services:
     image: heitorcarneiro/kong:3.3.0-ubuntu
     user: 'kong'
     environment:
-      KONG_DATABASE: 'off'
-      KONG_PROXY_LISTEN: '0.0.0.0:8080'
-      KONG_ADMIN_LISTEN: '0.0.0.0:8001'
-      KONG_ADMIN_ACCESS_LOG: 'off'
-      KONG_ADMIN_ERROR_LOG: /dev/stderr
-      KONG_PROXY_ACCESS_LOG: 'off'
-      KONG_PROXY_ERROR_LOG: /dev/stderr
-      KONG_DECLARATIVE_CONFIG: '/opt/kong/kong.yaml'
-      KONG_PLUGINS: bundled,kong-jwt2header,kong-path-allow,response-cache
-      KONG_LOG_LEVEL: debug
+      # KONG_DATABASE: 'off'
+      # KONG_PROXY_LISTEN: '0.0.0.0:8080'
+      # KONG_ADMIN_LISTEN: '0.0.0.0:8001'
+      # KONG_ADMIN_ACCESS_LOG: 'off'
+      # KONG_ADMIN_ERROR_LOG: /dev/stderr
+      # KONG_PROXY_ACCESS_LOG: 'off'
+      # KONG_PROXY_ERROR_LOG: /dev/stderr
+      # KONG_DECLARATIVE_CONFIG: '/opt/kong/kong.yaml'
+      # KONG_PLUGINS: bundled,kong-jwt2header,kong-path-allow,response-cache
+      # KONG_LOG_LEVEL: debug
+      KONG_LOG_LEVEL: error
     ports:
       - '8080:8080'
       - '8001:8001'
