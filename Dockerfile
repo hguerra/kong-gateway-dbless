@@ -10,7 +10,6 @@ RUN luarocks install kong-jwt2header
 RUN luarocks install kong-path-allow
 
 # https://github.com/allbarbos/kong-response-cache
-# Plugins dir: /usr/local/share/lua/5.1/kong/plugins
 RUN luarocks install kong-plugin-response-cache
 
 RUN mkdir -p /opt/kong

@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "python-jwt"
+version = "0.1.0"
+description = ""
+authors = ["Heitor Carneiro <heitor.carneiro@contabilizei.com.br>"]
+readme = "README.md"
+packages = [{include = "python_jwt"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyjwt = "^2.7.0"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

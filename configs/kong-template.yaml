@@ -1,4 +1,4 @@
-_format_version: '3.0'
+_format_version: "3.0"
 _transform: true
 
 upstreams:
@@ -53,9 +53,18 @@ services:
       - name: jwt
         enabled: true
         config:
+          uri_param_names:
+            - auth_token
+          cookie_names:
+            - kt
+          claims_to_verify:
+            - exp
+          header_names:
+            - Authorization
           secret_is_base64: false
           run_on_preflight: true
-          maximum_expiration: 1800
+          maximum_expiration: 900
+          key_claim_name: "iss"
       - name: kong-path-allow
         enabled: true
         config:
@@ -74,7 +83,7 @@ services:
           cache_ttl: 300
           strategy: redis
           content_type:
-            - 'application/json; charset=utf-8'
+            - "application/json; charset=utf-8"
           redis:
             database: 0
             host: redis
@@ -99,7 +108,7 @@ plugins:
     enabled: true
     config:
       origins:
-        - '*'
+        - "*"
       methods:
         - GET
         - HEAD
@@ -149,8 +158,8 @@ plugins:
   - name: kong-jwt2header
     enabled: true
     config:
-      strip_claims: 'false'
-      token_required: 'false'
+      strip_claims: "false"
+      token_required: "false"
 
 consumers:
   - username: mock-user
