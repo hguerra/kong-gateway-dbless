@@ -1,6 +1,6 @@
 function request() {
   var settings = {
-    url: "http://localhost:8080/gateway/health/incidents.schema.json?auth_token=abc",
+    url: "http://localhost:8080/gateway/health/status?auth_token=xyz",
     method: "GET",
     timeout: 0,
   };

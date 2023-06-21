@@ -7,6 +7,9 @@ networks:
 services:
   redis:
     image: redis:6-alpine
+    container_name: kong_redis
+    cpu_count: 1
+    mem_limit: 512m
     command: redis-server
     ports:
       - '6379:6379'
@@ -17,6 +20,9 @@ services:
   # http://localhost:8001/
   kong:
     image: heitorcarneiro/kong:3.3.0-ubuntu
+    container_name: kong_gateway
+    cpu_count: 1
+    mem_limit: 512m
     user: 'kong'
     environment:
       # KONG_DATABASE: 'off'
@@ -48,6 +54,9 @@ services:
   # http://localhost:1337/
   konga:
     image: pantsel/konga:0.14.9
+    container_name: kong_ui
+    cpu_count: 1
+    mem_limit: 512m
     environment:
       NODE_ENV: production
       TOKEN_SECRET: tokensecret
