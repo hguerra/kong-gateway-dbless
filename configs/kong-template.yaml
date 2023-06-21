@@ -4,7 +4,7 @@ _transform: true
 upstreams:
   - name: health-upstream
     targets:
-      - target: localhost:8001
+      - target: localhost:8100
         weight: 100
 
   - name: mock-upstream
@@ -27,7 +27,7 @@ services:
         enabled: true
         config:
           allow_paths:
-            - /status
+            - /status/ready
       - name: key-auth
         enabled: true
         config:

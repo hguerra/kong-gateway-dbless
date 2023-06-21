@@ -22,6 +22,7 @@ RUN chown -R kong:kong /opt/kong
 ENV KONG_DATABASE="off"
 ENV KONG_PROXY_LISTEN="0.0.0.0:8080"
 ENV KONG_ADMIN_LISTEN="0.0.0.0:8001"
+ENV KONG_STATUS_LISTEN="0.0.0.0:8100"
 ENV KONG_LOG_LEVEL="error"
 ENV KONG_ADMIN_ACCESS_LOG="off"
 ENV KONG_PROXY_ACCESS_LOG="off"
@@ -44,7 +45,7 @@ ENV KONG_NGINX_PROXY_GZIP_TYPES="application/atom+xml application/geo+json appli
 
 USER kong
 ENTRYPOINT ["/docker-entrypoint.sh"]
-EXPOSE 8080 8443 8001 8444
+EXPOSE 8080 8443 8001 8444 8100
 STOPSIGNAL SIGQUIT
 HEALTHCHECK --interval=10s --timeout=10s --retries=10 CMD kong health
 CMD ["kong", "docker-start"]

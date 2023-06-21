@@ -32,16 +32,16 @@ restart: config
 	docker compose logs -f kong
 
 test_unauthorized_health:
-	curl -i -X GET http://localhost:8080/gateway/health/status
+	curl -i -X GET http://localhost:8080/gateway/health/status/ready
 
 test_health:
-	curl -i -X GET http://localhost:8080/gateway/health/status?auth_token=xyz
+	curl -i -X GET http://localhost:8080/gateway/health/status/ready?auth_token=xyz
 
 test_gzip:
-	curl --compressed -i -X GET http://localhost:8080/gateway/health/status?auth_token=xyz -H 'Accept-Encoding: gzip'
+	curl --compressed -i -X GET http://localhost:8080/gateway/health/status/ready?auth_token=xyz -H 'Accept-Encoding: gzip'
 
 test_path_not_allowed:
-	curl -i -X GET http://localhost:8080/gateway/health/mypath?auth_token=xyz
+	curl -i -X GET http://localhost:8080/gateway/health/status?auth_token=xyz
 
 test_auth:
 	curl -i -X GET http://localhost:8080/mock/request -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhMzZjMzA0OWIzNjI0OWEzYzlmODg5MWNiMTI3MjQzYyIsImlhdCI6MTY4NzM0ODA2MSwiZXhwIjoxNjg3MzQ4NjYxLCJzdWIiOiJjZGE2NDAxMS00N2E4LTRhNmEtOGFhYy0wNmM3ZGI2ZmM1OTMiLCJnaXZlbl9uYW1lIjoiSGVpdG9yIiwiZmFtaWx5X25hbWUiOiJDYXJuZWlybyIsImVtYWlsIjoiaGVpdG9yQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidmlld2VyIiwiYWNjZXNzYXBwcm92YWwuYXBwcm92ZXIiXX0.43ls0r5E2SSx1ted0ItVLXOWG5IPT08xp81uIVbea9M'

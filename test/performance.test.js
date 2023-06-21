@@ -24,7 +24,7 @@ export function handleSummary(data) {
 }
 
 export default function () {
-  const url = 'http://localhost:8080/gateway/health/status?auth_token=xyz';
+  const url = 'http://localhost:8080/gateway/health/status/ready?auth_token=xyz';
   const res = http.get(url);
   check(res, { 'status was 200': (r) => r.status == 200 });
   sleep(1);
