@@ -17,6 +17,13 @@ clean:
 build_docker:
 	docker build --network host -t heitorcarneiro/kong:3.3.0-ubuntu .
 
+push_docker: clean config build_docker
+	docker push heitorcarneiro/kong:3.3.0-ubuntu
+
+build_push_docker_test:
+	docker build --network host -f Dockerfile.test  -t heitorcarneiro/kong:3.3.0-ubuntu-test .
+	docker push heitorcarneiro/kong:3.3.0-ubuntu-test
+
 build: clean config build_docker
 
 up: config

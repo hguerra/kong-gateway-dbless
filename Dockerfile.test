@@ -1,0 +1,6 @@
+FROM heitorcarneiro/kong:3.3.0-ubuntu
+USER root
+RUN apt update && apt-get install -y curl
+RUN mkdir -p /opt/kong
+RUN curl -L https://github.com/hguerra/envsubst/releases/download/v1.0.6/envsubst_linux_amd64 -o /opt/kong/envsubst && chmod +x /opt/kong/envsubst
+USER kong
